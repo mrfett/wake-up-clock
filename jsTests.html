@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Clock Javascript Tests</title>
+        <meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+	<style type="text/css">
+		body{
+			background:black;
+			color:#e1e1e1;
+		}
+
+		li {text-transform:capitalize;}
+		li span {font-weight:bold;}
+		li.pass span {color:green;}
+		li.fail span {color:red;}
+
+	</style>
+
+    </head>
+    <body>
+
+        <div class="pageContainer">
+		<h1>Clock Javascript Tests</h1>
+		<ul id="testResults">
+
+		</ul>
+        </div>
+
+	<script src="js/vendor/jquery-1.9.1.min.js"></script>
+	<script src="js/main-v2.js"></script>
+        <script type="text/javascript">
+
+		$(document).ready(function() {
+			runTests();
+		});
+
+		function runTests() {
+			var $test_results = new Array();
+			$test_results.push(test_1(), test_2(), test_3(), test_4(), test_5(), test_6(), test_7(), test_8(), test_9(), test_10(), test_11(), test_12(), test_13(), test_14(), test_15(), test_16());
+
+			$.each($test_results, function($index, $value) {
+				var $resultListItem = '<li class="'+ $value +'">Test ' + ($index +1) + ': <span>' + $value + '</span></li>';
+				$('#testResults').append($resultListItem);
+			});
+		}
+
+		/* Convert a timestamp to 4 digit hour/minute */
+		function test_1() {
+			var $testDate = new Date(1978, 8, 23, 7, 48, 32, 0);
+			var $result = timestamp_to_hours($testDate);
+
+			if (($result.length == 4) && ($result == '0748')) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Converting a timestamp defaults to current time */
+		function test_2 () {
+
+			var $expectedDate = new Date();
+			var $expectedHours = $expectedDate.getHours();
+			var $rawExpectedMinutes = '0' + $expectedDate.getMinutes();
+			var $expectedMinutes = $rawExpectedMinutes.substr($rawExpectedMinutes.length - 2);
+		
+			var $expectedValue = $expectedHours.toString() + $expectedMinutes.toString();
+
+			var $testValue = timestamp_to_hours();
+			console.log('Expected Value: ' + $expectedValue);
+			console.log('Actual Value: ' + $testValue);
+
+			if (parseInt($testValue) == parseInt($expectedValue)) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Getting an array of sleep times includes midnight */
+		function test_3 () {
+			var $sleepTimeArray = get_times_array('sleep');
+			console.log('Sleep Array: ' + $sleepTimeArray);
+			if ($.inArray('0000', $sleepTimeArray) != -1) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Combine 2 arrays */
+		function test_4 () {
+			var $testArray_1 = [1, 2, 3];
+			var $testArray_2 = [4, 5, 6];
+			var $expectedCombinedArray = [1,2,3,4,5,6];
+
+			var $combinedArray = my_combine_arrays($testArray_1, $testArray_2);
+			console.log('Test 4 ==================================');
+			console.log('Returned Array: ' + $combinedArray);
+			console.log('Expected Array: ' + $expectedCombinedArray);
+
+			if ($($combinedArray).not($expectedCombinedArray).length == 0 && $($expectedCombinedArray).not($combinedArray).length == 0) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Get closest number from an array of numbers */
+		function test_5 () {
+			$value = get_closest_value (1000, [0100, 0730, 0830, 0945]);
+
+			if ($value == 0945) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Return wake if the value is in the wake array */
+		function test_6 () {
+			var $value = sleep_or_wake('0730', ['0000', '1400', '1930'], ['0730', '1700']);
+			if ($value == 'wake') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Return sleep if value is in the sleep array */
+		function test_7 () {
+			var $value = sleep_or_wake('2000', ['0000', '1400', '2000'], ['0730', '1700']);
+			console.log('Value: ' + $value);
+			if ($value == 'sleep') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* If value is not in either array, return error */
+		function test_8 () {
+			var $value = sleep_or_wake('0735', [0000, 1400, 1930], [0730, 1700]);
+			if ($value == 'error') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Test setting the mode of the page to sleep */
+		function test_9() {
+			$('body').removeClass('sleep');
+			set_mode('sleep');
+			if ($('body').hasClass('sleep')) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Test setting the mode of the page to wake */
+		function test_10() {
+			$('body').removeClass('wake');
+			set_mode('wake');
+			if ($('body').hasClass('wake')) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Test formatting time for display */
+		function test_11() {
+			if (format_time('1600') == '<span class="hours">4</span><span class="minutes">00</span><span class="ampm">pm</span>') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Passing more than 4 characters to time formatter returns an error */
+		function test_12() {
+			if (format_time('160034') == 'error') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Passing less than 4 characters to time formatter returns an error */
+		function test_13() {
+			if (format_time('16') == 'error') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Get Day of the Week */
+		function test_14() {
+			var $testDate = new Date("July 22, 2013");
+			var $returnedDay = day_of_week($testDate);
+			console.log('Day of week: ' + $returnedDay);
+
+			if ($returnedDay == 'monday') {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Get closest includes looks for less than or equal to the number from an array of numbers */
+		function test_15 () {
+			$value = get_closest_value (830, [0100, 0730, 0830, 0945]);
+
+			if ($value == 0830) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+
+		/* Combine 2 arrays doesn't mess with the original two arrays */
+		function test_16 () {
+			var $controlArray_1 = [1, 2, 3];
+			var $controlArray_2 = [4, 5, 6];
+
+			var $testArray_1 = [1, 2, 3];
+			var $testArray_2 = [4, 5, 6];
+			var $expectedCombinedArray = [1,2,3,4,5,6];
+
+			var $combinedArray = my_combine_arrays($testArray_1, $testArray_2);
+			console.log('Test 16 ============================');
+			console.log('Test Array 1: ' + $testArray_1);
+			console.log('Control Array 1: ' + $controlArray_1);
+			console.log('Test Array 2: ' + $testArray_2);
+			console.log('Control Array 2: ' + $controlArray_2);
+
+			if (($($testArray_1).not($controlArray_1).length == 0 && $($controlArray_1).not($testArray_1).length == 0) && ($($testArray_2).not($controlArray_2).length == 0 && $($controlArray_2).not($testArray_2).length == 0)) {
+				return 'pass';
+			} else {
+				return 'fail';
+			}
+		}
+	</script>
+    </body>
+</html>

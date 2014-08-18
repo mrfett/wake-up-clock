@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Clock Test</title>
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <style>
+		
+		.pageContainer {
+			color:#fff;
+			height:100px;
+			padding:10px;
+			background:green;
+		}
+		.blue {background:blue;}
+		.black {background:black;}
+		h1 {margin:0;}
+
+	</style>
+    </head>
+    <body>
+        <div class="pageContainer">
+		<h1>Test Page</h1>
+		<p>The page loads green, then turns black or blue randomly</p>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+		$(document).ready(function() {
+			if (Math.random() > 0.5) {
+				$('.pageContainer').addClass('blue');
+			} else {
+				$('.pageContainer').addClass('black');
+			}
+		});	
+	</script>
+    </body>
+</html>

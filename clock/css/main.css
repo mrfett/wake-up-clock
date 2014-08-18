@@ -1,0 +1,9 @@
+html,
+body {
+	background:cyan;
+}
+
+ul.daysOfWeek {list-style:none;}
+
+.seconds:before,
+.minutes:before {content: ":";}

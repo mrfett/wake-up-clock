@@ -10,8 +10,14 @@ html {
   padding: 0;
 }
 body {
-  background: #000;
+  background: #000000 url('../images/backgrounds/night/night-2.jpg') 50% 50% no-repeat;
+  background-size: cover;
   color: #DEDEDE;
+}
+body.wake {
+  color: #FFF;
+  text-shadow: 0 0 1rem #000;
+  background-image: url('../images/backgrounds/day/day-2.jpg');
 }
 .wrapper {
   position: absolute;
@@ -34,6 +40,9 @@ body {
   background: rgba(255, 255, 255, 0.25);
   padding: 1rem 0;
 }
+.wake .day {
+  background: rgba(0, 0, 0, 0.3);
+}
 .day li {
   display: inline-block;
   width: 50%;
@@ -53,6 +62,12 @@ body {
 @media only screen and (max-width: 800px) {
   html {
     font-size: 60%;
+  }
+  body {
+    background-image: url('../images/backgrounds/night/night-1.png');
+  }
+  body.wake {
+    background-image: url('../images/backgrounds/day/day-1.png');
   }
 }
 @media only screen and (max-width: 480px) {

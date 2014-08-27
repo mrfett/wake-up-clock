@@ -34,7 +34,10 @@ body {
   text-align:center;
 }
 .hours:after {
-  content: " :";
+  content: ":";
+}
+.minutes:after {
+  content: " ";
 }
 .day {
   list-style:none;
@@ -50,6 +53,7 @@ body {
     width:50%;
     font-size:3rem;
     text-align:center;
+    text-transform:capitalize;
 
     &:first-child,
     &:last-child {

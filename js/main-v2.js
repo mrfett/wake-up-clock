@@ -9,7 +9,7 @@ Get combined array
 Get current time
 
 Find closest past time
-Find whether closest time is sleep or wake 
+Find whether closest time is sleep or wake
 
 Set current state
 
@@ -26,7 +26,7 @@ function syncTime() {
 	var $syncTimeLoopID = setInterval(function(){
 		console.log('checking for minute change');
 		var $currentTime = timestamp_to_hours();
-		
+
 		// Update time if the minute is different
 		if ($startTime != $currentTime) {
 			clearInterval($syncTimeLoopID);
@@ -36,13 +36,13 @@ function syncTime() {
 		}
 
 	}, 1000);
-	
+
 }
 
 /* Main timekeeping function, runs every minute after the sync function */
 function timeKeeper() {
 	console.log('Time keeper function started.');
-	
+
 	setInterval(function(){
 		update_display();
 	}, 60000);
@@ -51,7 +51,7 @@ function timeKeeper() {
 /* Update the display */
 function update_display() {
 	var $currentTime = timestamp_to_hours();
-	set_override();
+	//set_override();
 	var $override = $('#overrideStatus').text();
 	console.log('Override returned: ' + $override);
 	var $day = day_of_week();
@@ -119,7 +119,7 @@ function get_times_array ($mode) {
 	}
 
 	console.log('returning array of times for ' + $mode);
-	
+
 	return $timesArray;
 }
 
@@ -129,7 +129,7 @@ function timestamp_to_hours ($timestamp) {
 	var $hours = $timestamp.getHours();
 	var $minutes = $timestamp.getMinutes();
 
-	$hours = $hours<10?"0"+$hours:$hours;	
+	$hours = $hours<10?"0"+$hours:$hours;
 	$minutes = $minutes<10?"0"+$minutes:$minutes;
 
 	return $hours.toString() + $minutes.toString();
@@ -178,7 +178,7 @@ function set_mode($mode) {
 	} else {
 		$('body').removeClass('wake').addClass('sleep error');
 	}
-		
+
 }
 
 /* Convert 4 digit time into a nice display format */

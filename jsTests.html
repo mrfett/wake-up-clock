@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -67,16 +68,17 @@
 			var $expectedHours = $expectedDate.getHours();
 			var $rawExpectedMinutes = '0' + $expectedDate.getMinutes();
 			var $expectedMinutes = $rawExpectedMinutes.substr($rawExpectedMinutes.length - 2);
-		
+
 			var $expectedValue = $expectedHours.toString() + $expectedMinutes.toString();
 
 			var $testValue = timestamp_to_hours();
-			console.log('Expected Value: ' + $expectedValue);
-			console.log('Actual Value: ' + $testValue);
 
 			if (parseInt($testValue) == parseInt($expectedValue)) {
 				return 'pass';
 			} else {
+        console.log('Expected Value: ' + $expectedValue);
+        console.log('Actual Value: ' + $testValue);
+
 				return 'fail';
 			}
 		}
@@ -84,10 +86,12 @@
 		/* Getting an array of sleep times includes midnight */
 		function test_3 () {
 			var $sleepTimeArray = get_times_array('sleep');
-			console.log('Sleep Array: ' + $sleepTimeArray);
+
 			if ($.inArray('0000', $sleepTimeArray) != -1) {
 				return 'pass';
 			} else {
+        console.log('Sleep Array: ' + $sleepTimeArray);
+
 				return 'fail';
 			}
 		}
@@ -99,13 +103,14 @@
 			var $expectedCombinedArray = [1,2,3,4,5,6];
 
 			var $combinedArray = my_combine_arrays($testArray_1, $testArray_2);
-			console.log('Test 4 ==================================');
-			console.log('Returned Array: ' + $combinedArray);
-			console.log('Expected Array: ' + $expectedCombinedArray);
 
 			if ($($combinedArray).not($expectedCombinedArray).length == 0 && $($expectedCombinedArray).not($combinedArray).length == 0) {
 				return 'pass';
 			} else {
+        console.log('Test 4 ==================================');
+        console.log('Returned Array: ' + $combinedArray);
+        console.log('Expected Array: ' + $expectedCombinedArray);
+
 				return 'fail';
 			}
 		}
@@ -134,10 +139,13 @@
 		/* Return sleep if value is in the sleep array */
 		function test_7 () {
 			var $value = sleep_or_wake('2000', ['0000', '1400', '2000'], ['0730', '1700']);
-			console.log('Value: ' + $value);
+
 			if ($value == 'sleep') {
 				return 'pass';
 			} else {
+        console.log('Test 7 ==================================');
+        console.log('Value: ' + $value);
+
 				return 'fail';
 			}
 		}
@@ -204,12 +212,15 @@
 		/* Get Day of the Week */
 		function test_14() {
 			var $testDate = new Date("July 22, 2013");
-			var $returnedDay = day_of_week($testDate);
-			console.log('Day of week: ' + $returnedDay);
+      var $returnedDay = day_of_week($testDate);
+			console.log('Day of week: ' + $returnedDay[1]);
 
-			if ($returnedDay == 'monday') {
+			if ($returnedDay[1] == 'monday') {
 				return 'pass';
 			} else {
+        console.log('Test 14 ==================================');
+        console.log('Day of week: ' + $returnedDay[1]);
+
 				return 'fail';
 			}
 		}
@@ -235,15 +246,16 @@
 			var $expectedCombinedArray = [1,2,3,4,5,6];
 
 			var $combinedArray = my_combine_arrays($testArray_1, $testArray_2);
-			console.log('Test 16 ============================');
-			console.log('Test Array 1: ' + $testArray_1);
-			console.log('Control Array 1: ' + $controlArray_1);
-			console.log('Test Array 2: ' + $testArray_2);
-			console.log('Control Array 2: ' + $controlArray_2);
 
 			if (($($testArray_1).not($controlArray_1).length == 0 && $($controlArray_1).not($testArray_1).length == 0) && ($($testArray_2).not($controlArray_2).length == 0 && $($controlArray_2).not($testArray_2).length == 0)) {
 				return 'pass';
 			} else {
+        console.log('Test 16 ============================');
+        console.log('Test Array 1: ' + $testArray_1);
+        console.log('Control Array 1: ' + $controlArray_1);
+        console.log('Test Array 2: ' + $testArray_2);
+        console.log('Control Array 2: ' + $controlArray_2);
+
 				return 'fail';
 			}
 		}

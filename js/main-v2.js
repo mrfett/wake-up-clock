@@ -78,7 +78,7 @@ function update_display() {
 	}
 
 	update_time(format_time($currentTime));
-	update_day($day);
+	update_days($day);
 }
 
 /* Get the string value for override */
@@ -140,8 +140,24 @@ function day_of_week ($timestamp) {
 	$timestamp = typeof $timestamp !== 'undefined' ? $timestamp : new Date();
 	var $daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 	var $day = $timestamp.getDay();
+	var $today = $daysOfWeek[$day];
+	if ($day != 0) {
+		var $yesterday = $daysOfWeek[$day - 1];
+	} else {
+		var $yesterday = "saturday";
+	}
+	if ($day != 6) {
+		var $tomorrow = $daysOfWeek[$day + 1];
+	} else {
+		var $tomorrow = "sunday";
+	}
+	console.log('Yesterday: ' + $yesterday);
+	console.log('Today: ' + $today);
+	console.log('Tomorrow: ' + $tomorrow);
 
-	return $daysOfWeek[$day];
+	var $daysArray = [$yesterday, $today, $tomorrow];
+
+	return $daysArray;
 }
 
 /* Find the closest item to a given value in an array */
@@ -211,6 +227,8 @@ function update_time($time) {
 }
 
 /* update the day display */
-function update_day($day) {
-	$('li.today').text($day);
+function update_days($day) {
+	$('li.yesterday').text($day[0]);
+	$('li.today').text($day[1]);
+	$('li.tomorrow').text($day[2]);
 }

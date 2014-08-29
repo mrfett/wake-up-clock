@@ -24,6 +24,10 @@ body.wake {
   top: 50%;
   transform: translate(0, -50%);
   width: 100%;
+  -webkit-animation: screensaver 5s infinite;
+  /* Chrome, Safari, Opera */
+
+  animation: screensaver 5s infinite;
 }
 .time {
   height: 50%;
@@ -77,5 +81,67 @@ body.wake {
 @media only screen and (max-width: 480px) {
   html {
     font-size: 40%;
+  }
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes screensaver {
+  0% {
+    -webkit-transform: translate(0%, -50%);
+    /* Chrome, Safari, Opera */
+  
+  }
+  25% {
+    -webkit-transform: translate(5%, -45%);
+    /* Chrome, Safari, Opera */
+  
+  }
+  75% {
+    -webkit-transform: translate(-5%, -55%);
+    /* Chrome, Safari, Opera */
+  
+  }
+  100% {
+    -webkit-transform: translate(0%, -50%);
+    /* Chrome, Safari, Opera */
+  
+  }
+}
+/* Standard syntax */
+@keyframes screensaver {
+  0% {
+    -ms-transform: translate(0%, -50%);
+    /* IE 9 */
+  
+    -webkit-transform: translate(0%, -50%);
+    /* Chrome, Safari, Opera */
+  
+    transform: translate(0%, -50%);
+  }
+  25% {
+    -ms-transform: translate(5%, -45%);
+    /* IE 9 */
+  
+    -webkit-transform: translate(5%, -45%);
+    /* Chrome, Safari, Opera */
+  
+    transform: translate(5%, -45%);
+  }
+  75% {
+    -ms-transform: translate(-5%, -55%);
+    /* IE 9 */
+  
+    -webkit-transform: translate(-5%, -55%);
+    /* Chrome, Safari, Opera */
+  
+    transform: translate(-5%, -55%);
+  }
+  100% {
+    -ms-transform: translate(0%, -50%);
+    /* IE 9 */
+  
+    -webkit-transform: translate(0%, -50%);
+    /* Chrome, Safari, Opera */
+  
+    transform: translate(0%, -50%);
   }
 }

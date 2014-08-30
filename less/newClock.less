@@ -26,8 +26,8 @@ body {
   top:50%;
   transform:translate(0, -50%);
   width:100%;
-  -webkit-animation: screensaver 5s infinite; /* Chrome, Safari, Opera */
-  animation: screensaver 5s infinite;
+  -webkit-animation: screensaver 60s * 15 infinite; /* Chrome, Safari, Opera */
+  animation: screensaver 60s * 15 infinite;
 }
 .time {
   height:50%;
@@ -94,18 +94,24 @@ and (max-width : 480px) {
 
 
 /* Chrome, Safari, Opera */
+@defaultX: 0%;
+@defaultY: -50%;
+@screensaverOffset:2;
 @-webkit-keyframes screensaver {
     0%   {
-      -webkit-transform:   translate(0%, -50%); /* Chrome, Safari, Opera */
+      -webkit-transform:   translate(@defaultX, @defaultY - @screensaverOffset); /* Chrome, Safari, Opera */
     }
     25%  {
-      -webkit-transform:   translate(5%, -45%); /* Chrome, Safari, Opera */
+      -webkit-transform:   translate(@defaultX + @screensaverOffset, @defaultY); /* Chrome, Safari, Opera */
     }
-    75%   {
-      -webkit-transform:   translate(-5%, -55%); /* Chrome, Safari, Opera */
+    50%   {
+      -webkit-transform:   translate(@defaultX, @defaultY + @screensaverOffset); /* Chrome, Safari, Opera */
+    }
+    75%  {
+      -webkit-transform:   translate(@defaultX - @screensaverOffset, @defaultY); /* Chrome, Safari, Opera */
     }
     100%  {
-      -webkit-transform:   translate(0%, -50%); /* Chrome, Safari, Opera */
+      -webkit-transform:   translate(@defaultX, @defaultY - @screensaverOffset); /* Chrome, Safari, Opera */
     }
 
 }
@@ -113,23 +119,28 @@ and (max-width : 480px) {
 /* Standard syntax */
 @keyframes screensaver {
     0%   {
-      -ms-transform:       translate(0%, -50%); /* IE 9 */
-      -webkit-transform:   translate(0%, -50%); /* Chrome, Safari, Opera */
-      transform:           translate(0%, -50%);
+      -ms-transform:       translate(@defaultX, @defaultY - @screensaverOffset); /* IE 9 */
+      -webkit-transform:   translate(@defaultX, @defaultY - @screensaverOffset); /* Chrome, Safari, Opera */
+      transform:           translate(@defaultX, @defaultY - @screensaverOffset);
     }
     25%  {
-      -ms-transform:       translate(5%, -45%); /* IE 9 */
-      -webkit-transform:   translate(5%, -45%); /* Chrome, Safari, Opera */
-      transform:           translate(5%, -45%);
+      -ms-transform:       translate(@defaultX + @screensaverOffset / 2, @defaultY); /* IE 9 */
+      -webkit-transform:   translate(@defaultX + @screensaverOffset / 2, @defaultY); /* Chrome, Safari, Opera */
+      transform:           translate(@defaultX + @screensaverOffset / 2, @defaultY);
+    }
+    50% {
+      -ms-transform:       translate(@defaultX, @defaultY + @screensaverOffset); /* IE 9 */
+      -webkit-transform:   translate(@defaultX, @defaultY + @screensaverOffset); /* Chrome, Safari, Opera */
+      transform:           translate(@defaultX, @defaultY + @screensaverOffset);
     }
     75%   {
-      -ms-transform:       translate(-5%, -55%); /* IE 9 */
-      -webkit-transform:   translate(-5%, -55%); /* Chrome, Safari, Opera */
-      transform:           translate(-5%, -55%);
+      -ms-transform:       translate(@defaultX - @screensaverOffset / 2, @defaultY); /* IE 9 */
+      -webkit-transform:   translate(@defaultX - @screensaverOffset / 2, @defaultY); /* Chrome, Safari, Opera */
+      transform:           translate(@defaultX - @screensaverOffset / 2, @defaultY);
     }
     100%  {
-      -ms-transform:       translate(0%, -50%); /* IE 9 */
-      -webkit-transform:   translate(0%, -50%); /* Chrome, Safari, Opera */
-      transform:           translate(0%, -50%);
+      -ms-transform:       translate(@defaultX, @defaultY - @screensaverOffset); /* IE 9 */
+      -webkit-transform:   translate(@defaultX, @defaultY - @screensaverOffset); /* Chrome, Safari, Opera */
+      transform:           translate(@defaultX, @defaultY - @screensaverOffset);
     }
 }

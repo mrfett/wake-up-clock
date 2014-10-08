@@ -42,9 +42,15 @@ function syncTime() {
 /* Main timekeeping function, runs every minute after the sync function */
 function timeKeeper() {
 	console.log('Time keeper function started.');
+	var $currentCount = 0;
+	var $resetCount = 120;
 
 	setInterval(function(){
+		if ($currentCount >= $resetCount) {
+			location.reload();
+		}
 		update_display();
+		$currentCount++;
 	}, 60000);
 }
 

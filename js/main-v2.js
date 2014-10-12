@@ -56,7 +56,8 @@ function update_display() {
 	console.log('Override returned: ' + $override);
 	var $day = day_of_week();
 
-	if ($override != null) {
+	if ($override != null && $override != "") {
+		console.log("setting mode from override.");
 		set_mode($override);
 	} else {
 		console.log('No override set; calculating sleep/wake status');
